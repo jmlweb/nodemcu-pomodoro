@@ -1,0 +1,40 @@
+{
+    "env": {
+        "arduino_path": "/Applications/Arduino.app/Contents/Java",
+        "arduino_avr_include_path": "${env:arduino_path}/hardware/arduino/avr",
+        "arduino_avr_include2_path": "${env:arduino_path}/hardware/tools/avr/avr/include",
+        "arduino_avr_compiler_path": "${env:arduino_path}/hardware/tools/avr/bin/avr-g++"
+    },
+    "configurations": [
+        {
+            "name": "Mac",
+            "defines": [
+                "__CC_ARM",
+                "ARDUINO=10813",
+                "F_CPU=16000000L",
+                "USBCON"
+            ],
+            "includePath": [
+                "${workspaceRoot}",
+                "${env:arduino_avr_include_path}/**",
+                "${env:arduino_avr_include2_path}/**",
+                "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/**",
+                "/Applications/Arduino.app/Contents/Java/tools/**",
+                "/Users/josemanuellucasmunoz/Library/Arduino15/packages/esp8266/hardware/esp8266/2.7.1/**",
+                "/Users/josemanuellucasmunoz/Library/Arduino15/packages/esp8266/tools/**"
+            ],
+            "forcedInclude": [
+                "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h"
+            ],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "${env:arduino_compiler_path}  -std=gnu++11 -mmcu=atmega2560",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
