@@ -1,5 +1,9 @@
 {
   "files.associations": {
-    "random": "cpp"
+    "random": "cpp",
+    "functional": "cpp",
+    "memory": "cpp",
+    "typeinfo": "cpp",
+    "vector": "cpp"
   }
 }
