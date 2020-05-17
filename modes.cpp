@@ -21,6 +21,14 @@ void Modes::advance() {
   }
 };
 
+void Modes::go_to_waiting_for_relax() {
+  current = WAIT_RELAX;
+}
+
+void Modes::go_to_waiting_for_work() {
+  current = WAIT_WORK;
+}
+
 byte Modes::get_current() {
   return current;
 };

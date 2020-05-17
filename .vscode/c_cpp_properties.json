@@ -23,9 +23,7 @@
                 "/Users/josemanuellucasmunoz/Library/Arduino15/packages/esp8266/hardware/esp8266/2.7.1/**",
                 "/Users/josemanuellucasmunoz/Library/Arduino15/packages/esp8266/tools/**"
             ],
-            "forcedInclude": [
-                "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/Arduino.h"
-            ],
+            "forcedInclude": [],
             "macFrameworkPath": [
                 "/System/Library/Frameworks",
                 "/Library/Frameworks"

@@ -4,6 +4,7 @@
     "functional": "cpp",
     "memory": "cpp",
     "typeinfo": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "cstddef": "cpp"
   }
 }
