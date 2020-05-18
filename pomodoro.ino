@@ -2,6 +2,7 @@
 #include "timer.h";
 #include "led.h";
 #include "button.h";
+#include "led_notifier.h";
 
 Modes modes;
 Timer work_timer(25);
@@ -10,6 +11,7 @@ Led red_led(D2);
 Led green_led(D1);
 Button start_button(D4);
 Button stop_button(D3);
+LedNotifier led_notifier;
 
 void start() {
   if (modes.is_waiting()) {
@@ -46,30 +48,28 @@ void setup() {
   green_led.config();
   start_button.config();
   stop_button.config();
+  led_notifier.init(&modes);
 }
 
 void loop() {
+  led_notifier.info();
   if (modes.is_waiting_for_work()) {
-    Serial.println("waiting_for_work");
     red_led.stop_blink();
     red_led.off();
     green_led.blink();
   }
   if (modes.is_working()) {
-    Serial.println("working");
     red_led.on();
     red_led.stop_blink();
     green_led.stop_blink();
     green_led.off();
   }
   if (modes.is_waiting_for_relax()) {
-    Serial.println("waiting_for_relax");
     red_led.blink();
     green_led.stop_blink();
     green_led.off();
   }
   if (modes.is_relaxing()) {
-    Serial.println("relaxing");
     red_led.off();
     red_led.stop_blink();
     green_led.stop_blink();
