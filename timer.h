@@ -4,15 +4,14 @@
 
 class Timer {
   private:
-    int started_time;
-    int time_limit;
+    unsigned int started_time;
+    unsigned int time_limit;
 
   public:
     bool has_started;
 
+    Timer();
     Timer(byte minutes);
-
-    void init();
 
     int get_ellapsed_time();
 

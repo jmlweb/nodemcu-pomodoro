@@ -1,6 +1,6 @@
 #include "led.h"
 
-int const BLINKING_TIME = 500;
+unsigned int const BLINKING_TIME = 500;
 
 Led::Led() {
   this->pin;
@@ -27,6 +27,7 @@ void Led::off() {
 }
 
 void Led::blink() {
+  Serial.println("blink");
   if (!started_time) {
     started_time = millis();
   } else {

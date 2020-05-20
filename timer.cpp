@@ -1,12 +1,13 @@
 #include "timer.h"
 
-Timer::Timer(byte minutes) {
+Timer::Timer() {
+  this->time_limit = 0;
   this->has_started = false;
-  this->started_time = NULL;
-  this->time_limit = minutes * 60 * 1000;
+  this->started_time;
 }
 
-void Timer::init() {
+Timer::Timer(byte minutes) {
+  this->time_limit = minutes * 60 * 1000;
   this->has_started = true;
   this->started_time = millis();
 }

@@ -1,54 +1,40 @@
 #include "modes.h"
 
-byte const TOTAL_MODES = 4;
-byte const WAIT_WORK = 0;
-byte const WORK = 1;
-byte const WAIT_RELAX = 2;
-byte const RELAX = 3;
+Mode waitingForWork("waitingForWork", "wait", "work", 0);
+Mode working("working", "action", "work", 25);
+Mode waitingForRelax("waitingForRelax", "wait", "relax", 0);
+Mode relaxing("relaxing", "action", "relax", 5);
 
 Modes::Modes() {
-  this->current = 0;
-};
-
-void Modes::set_current(byte mode) {
-  current = mode;
-};
+  waitingForWork.set_next(&working);
+  working.set_next(&waitingForRelax);
+  waitingForRelax.set_next(&relaxing);
+  relaxing.set_next(&waitingForWork);
+  this->current = &waitingForWork;
+}
 
 void Modes::advance() {
-  current++;
-  if (current >= TOTAL_MODES) {
-    current = 0;
+  current = current->next;
+}
+
+void Modes::set_current(String mode_name) {
+  while(current->name != mode_name) {
+    advance();
   }
-};
-
-void Modes::go_to_waiting_for_relax() {
-  current = WAIT_RELAX;
 }
 
-void Modes::go_to_waiting_for_work() {
-  current = WAIT_WORK;
+String Modes::get_name() {
+  return current->name;
 }
 
-byte Modes::get_current() {
-  return current;
-};
-
-bool Modes::is_waiting_for_work() {
-  return current == WAIT_WORK;
-};
-
-bool Modes::is_waiting_for_relax() {
-  return current == WAIT_RELAX;
+long Modes::get_time_limit() {
+  return current->time_limit;
 }
 
-bool Modes::is_waiting() {
-  return is_waiting_for_work() || is_waiting_for_relax();
+boolean Modes::is_action_type() {
+  return current->type == "action";
 }
 
-bool Modes::is_working() {
-  return current == WORK;
-}
-
-bool Modes::is_relaxing() {
-  return current == RELAX;
+boolean Modes::is_work_stage() {
+  return current->stage == "work";
 }

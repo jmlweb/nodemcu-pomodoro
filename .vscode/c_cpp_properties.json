@@ -29,7 +29,7 @@
                 "/Library/Frameworks"
             ],
             "intelliSenseMode": "gcc-x64",
-            "compilerPath": "${env:arduino_compiler_path}  -std=gnu++11 -mmcu=atmega2560",
+            "compilerPath": "${env:arduino_compiler_path}  -std=gnu++11",
             "cStandard": "c11",
             "cppStandard": "c++17"
         }

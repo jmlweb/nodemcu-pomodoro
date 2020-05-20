@@ -1,6 +1,6 @@
 #include "button.h"
 
-int const DEBOUNCE_DELAY = 50;
+#define DEBOUNCE_DELAY 50
 
 Button::Button(byte pin) {
   this->pin = pin;
@@ -10,7 +10,6 @@ Button::Button(byte pin) {
 void Button::config() {
   pinMode(pin, INPUT_PULLUP);
   last_state = digitalRead(pin);
-  Serial.println(last_state);
 }
 
 bool Button::is_active() {
