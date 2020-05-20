@@ -18,10 +18,12 @@ void Led::config() {
 
 void Led::on() {
   digitalWrite(pin, HIGH);
+  started_time = NULL;
 }
 
 void Led::off() {
   digitalWrite(pin, LOW);
+  started_time = NULL;
 }
 
 void Led::blink() {
@@ -31,9 +33,9 @@ void Led::blink() {
     if ((millis() - started_time) >= BLINKING_TIME) {
       started_time = millis();
       if (digitalRead(pin) == HIGH) {
-        off();
+        digitalWrite(pin, LOW);
       } else {
-        on();
+        digitalWrite(pin, HIGH);
       }
     }
   }

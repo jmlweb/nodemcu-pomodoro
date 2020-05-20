@@ -16,15 +16,15 @@ LedNotifier led_notifier;
 void start() {
   if (modes.is_waiting()) {
     modes.advance();
-    Timer timer = get_proper_timer();
-    timer.init();
+    Timer *timer = &get_proper_timer();
+    timer->init();
   }
 }
 
 void stop() {
   Serial.println(modes.get_current());
-  Timer timer = get_proper_timer();
-  timer.reset();
+  Timer *timer = &get_proper_timer();
+  timer->reset();
   if (modes.is_working() || modes.is_waiting_for_work()) {
     modes.go_to_waiting_for_relax();
   } else {
@@ -48,37 +48,15 @@ void setup() {
   green_led.config();
   start_button.config();
   stop_button.config();
-  led_notifier.init(&modes);
+  led_notifier.init(&modes, &red_led, &green_led);
 }
 
 void loop() {
-  led_notifier.info();
-  if (modes.is_waiting_for_work()) {
-    red_led.stop_blink();
-    red_led.off();
-    green_led.blink();
-  }
-  if (modes.is_working()) {
-    red_led.on();
-    red_led.stop_blink();
-    green_led.stop_blink();
-    green_led.off();
-  }
-  if (modes.is_waiting_for_relax()) {
-    red_led.blink();
-    green_led.stop_blink();
-    green_led.off();
-  }
-  if (modes.is_relaxing()) {
-    red_led.off();
-    red_led.stop_blink();
-    green_led.stop_blink();
-    green_led.on();
-  }
+  led_notifier.update();
   if (!modes.is_waiting()) {
-    Timer timer = get_proper_timer();
-    if (timer.has_finished()) {
-      timer.reset();
+    Timer *timer = &get_proper_timer();
+    if (timer->has_finished()) {
+      timer->reset();
       modes.advance();
     }
   };
