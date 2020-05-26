@@ -15,6 +15,8 @@
                 "USBCON"
             ],
             "includePath": [
+                "/Users/josemanuellucasmunoz/Documents/Arduino/libraries/ArduinoJson/src",
+                "/Users/josemanuellucasmunoz/Library/Arduino15/packages/esp8266/hardware/esp8266/2.7.1/libraries/ESP8266HTTPClient/src",
                 "${workspaceRoot}",
                 "${env:arduino_avr_include_path}/**",
                 "${env:arduino_avr_include2_path}/**",

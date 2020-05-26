@@ -6,5 +6,6 @@
     "typeinfo": "cpp",
     "vector": "cpp",
     "cstddef": "cpp"
-  }
+  },
+  "editor.defaultFormatter": "ms-vscode.cpptools"
 }

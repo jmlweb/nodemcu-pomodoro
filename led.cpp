@@ -27,7 +27,6 @@ void Led::off() {
 }
 
 void Led::blink() {
-  Serial.println("blink");
   if (!started_time) {
     started_time = millis();
   } else {

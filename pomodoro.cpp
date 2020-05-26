@@ -30,7 +30,7 @@ void Pomodoro::stop() {
 
 void Pomodoro::process() {
   if (modes.is_action_type()) {
-    Serial.println(timer.get_remaining_time());
+    // Serial.println(timer.get_remaining_time());
     if (timer.has_finished()) {
       timer.reset();
       modes.advance();
