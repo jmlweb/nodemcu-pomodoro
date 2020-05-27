@@ -19,9 +19,8 @@ const char* wifi_password = WIFI_PASSWORD;
 Button start_button(START_BUTTON_PIN);
 Button stop_button(STOP_BUTTON_PIN);
 LedNotifier led_notifier(RED_LED_PIN, GREEN_LED_PIN);
-SlackNotifier slack_notifier(SLACK_OAUTH_TOKEN);
 Pomodoro pomodoro;
-
+SlackNotifier slack_notifier(SLACK_OAUTH_TOKEN);
 
 void setup() {
   Serial.begin(115200);

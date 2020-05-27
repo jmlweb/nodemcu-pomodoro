@@ -1,6 +1,4 @@
 #include <Arduino.h>
-#include <ESP8266HTTPClient.h>
-#include <WiFiClientSecure.h>
 #include "slack_notifier.h"
 
 String working_json = "{\"profile\": { \"status_text\": \"On Pomodoro\", \"status_emoji\": \":tomato:\" } }";
@@ -10,20 +8,22 @@ SlackNotifier::SlackNotifier(char *token)
 {
   this->token = token;
   this->last_mode = "waitingForWork";
+  WiFiClientSecure client;
+  HTTPClient http;
+  http.setReuse(true);
 }
 
 void SlackNotifier::resolve(String mode)
 {
   if (mode != last_mode && (mode == "working" || mode == "relaxing"))
   {
-    std::unique_ptr<BearSSL::WiFiClientSecure>client(new BearSSL::WiFiClientSecure);
-    client->setInsecure();
-    HTTPClient http;
     last_mode = mode;
-    if (http.begin(*client, "https://slack.com/api/users.profile.set")) //Iniciar conexión
+    client.stop();
+    client.setInsecure();
+    if (http.begin(client, "https://slack.com/api/users.profile.set")) //Iniciar conexión
     {
       http.addHeader("Content-Type", "application/json");
-      http.addHeader("Authorization", strcat("Bearer ", token));
+      http.addHeader("Authorization", "Bearer " + String(token));
       String json = mode == "working" ? working_json : relaxing_json;
       int httpCode = http.POST(json); // Realizar petición
 
@@ -35,6 +35,12 @@ void SlackNotifier::resolve(String mode)
           Serial.println("payload");
           Serial.println(payload);           // Mostrar respuesta por serial
         }
+        else
+        {
+           Serial.println("httpcode");
+          Serial.println(httpCode);
+        }
+
       }
       else
       {
